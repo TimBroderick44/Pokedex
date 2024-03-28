@@ -31,36 +31,25 @@ async function fetchData() {
         const imgElement = document.querySelector(".pokedex__page__sprite");
         const nameElement = document.querySelector(".pokedex__page__title");
 
-        // Original Hacky Way ///// 
-        nameElement.textContent = neededData.name;
-        window.setTimeout(() => {
-            // .offsetWidth gives the width of the element (it's a javascript property)
-            // This is a way to make the text fit in the container
-            // .setTimeout is a way to make the code run after the DOM has been updated
-            if (nameElement.offsetWidth > 500) {
-                nameElement.style.fontSize = "25px";
-            } else if (nameElement.offsetWidth > 400) {
-                nameElement.style.fontSize = "30px";
-            } else if (nameElement.offsetWidth > 250) {
-                nameElement.style.fontSize = "35px";
-            } else {
-                nameElement.style.fontSize = "50px";
-            }
-        }, 0);
+        const getFontSize = (textLength) => {
+            // Define the minimum and maximum font sizes
+            const minFontSize = 20; // Minimum font size in pixels
+            const maxFontSize = 50; // Maximum font size in pixels
 
-        // requestAnimationFrame(() => {
-        //     // Is this any better??? 
-        //     // .requestanimationframe pushes it to the front of the callback queue at the next repaint.
-        //     if (nameElement.offsetWidth > 500) {
-        //         nameElement.style.fontSize = "25px";
-        //     } else if (nameElement.offsetWidth > 400) {
-        //         nameElement.style.fontSize = "30px";
-        //     } else if (nameElement.offsetWidth > 250) {
-        //         nameElement.style.fontSize = "35px";
-        //     } else {
-        //         nameElement.style.fontSize = "50px";
-        //     }
-        // });
+            // Calculate a base font size based on text length (you may need to adjust the formula to fit your needs)
+            let fontSize = maxFontSize - (textLength - 1) * 2;
+
+            // Ensure the font size is within the min and max range
+            fontSize = Math.max(minFontSize, Math.min(fontSize, maxFontSize));
+
+            return `${fontSize}px`;
+        };
+
+        // Apply the font size after setting the text content
+        nameElement.textContent = neededData.name;
+        nameElement.style.fontSize = getFontSize(
+            nameElement.textContent.length
+        );
 
         imgElement.src = pokeSprite;
         pokePage.style.display = "flex";
