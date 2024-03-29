@@ -33,8 +33,8 @@ async function fetchData() {
 
         const getFontSize = (textLength) => {
             // Define the minimum and maximum font sizes
-            const minFontSize = 20; // Minimum font size in pixels
-            const maxFontSize = 50; // Maximum font size in pixels
+            const minFontSize = 23; // Minimum font size in pixels
+            const maxFontSize = 35; // Maximum font size in pixels
 
             // Calculate a base font size based on text length (you may need to adjust the formula to fit your needs)
             let fontSize = maxFontSize - (textLength - 1) * 2;
@@ -50,6 +50,14 @@ async function fetchData() {
         nameElement.style.fontSize = getFontSize(
             nameElement.textContent.length
         );
+        // Check the length of the text content
+        if (nameElement.textContent.length > 10) {
+            // Allow text to wrap to the next line
+            nameElement.style.whiteSpace = "normal";
+        } else {
+            // Prevent text from wrapping if not needed
+            nameElement.style.whiteSpace = "nowrap";
+        }
 
         imgElement.src = pokeSprite;
         pokePage.style.display = "flex";
