@@ -6,7 +6,7 @@ We were challenged to use an API and create a small app. I'm a massive nerd so h
 
 ## 1. You can't really show sound.....
 
-![You can't really show sound.....](./assets/screenshot.png)
+![You can't really show sound.....](./assets/screenshot.PNG)
 
 ## What did I use to create it?
 
